@@ -2,10 +2,21 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>KNB</title>
     <link rel="stylesheet" href="static/styles.css">
 </head>
 <body>
-    <h1>Hello world</h1>
+    <head>
+        <h1>STONE-SCISSORS-PAPER</h1>
+    </head>
+    <main>
+        <form method="POST">
+            <label>Enter your sign</label>
+            <input type="submit" name="sign" value="stone">
+            <input type="submit" name="sign" value="scissors">
+            <input type="submit" name="sign" value="paper">
+        </form>
+        <h1>{{ result }}</h1>
+    </main>
 </body>
 </html>
