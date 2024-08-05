@@ -1,0 +1,39 @@
+body {
+    background-color: #F0FFFF;
+}
+header h1 {
+    font-family: sans-serif Verdana;
+    color: #008B8B;
+    text-align: center;
+}
+main {
+    height: 600px;
+}
+main div {
+    text-align: center;
+    margin-bottom: 15px;
+}
+main label {
+    font-family: sans-serif Verdana;
+    color: #008B8B;
+    text-align: center;
+}
+main input {
+    height: 500px;
+    width: 500px;
+    border: solid 3px #008B8B;
+    border-radius: 10px;
+    font-size: 70px;
+    background: #DCDCDC;
+    transition: 1.2s;
+}
+main input:hover {
+    border: solid 3px #00FFFF;
+    background: #F8F8FF;
+    margin: 0 50px;
+}
+footer h1 {
+    font-family: sans-serif Verdana;
+    color: #008B8B;
+    text-align: center;
+}

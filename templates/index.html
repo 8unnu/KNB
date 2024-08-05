@@ -6,17 +6,23 @@
     <link rel="stylesheet" href="static/styles.css">
 </head>
 <body>
-    <head>
+    <header>
         <h1>STONE-SCISSORS-PAPER</h1>
-    </head>
+    </header>
     <main>
         <form method="POST">
-            <label>Enter your sign</label>
-            <input type="submit" name="sign" value="stone">
-            <input type="submit" name="sign" value="scissors">
-            <input type="submit" name="sign" value="paper">
+            <div>
+                <label>Enter your sign</label>
+            </div>
+            <div>
+                <input type="submit" name="sign" value="🪨">
+                <input type="submit" name="sign" value="✂️">
+                <input type="submit" name="sign" value="🧻">
+            </div>
         </form>
-        <h1>{{ result }}</h1>
     </main>
+    <footer>
+        <h1>{{ result }}</h1>
+    </footer>
 </body>
 </html>
