@@ -7,8 +7,18 @@
 </head>
 <body>
     <header>
-        <h1>STONE-SCISSORS-PAPER</h1>
-        <h1>{{ score }}</h1>
+        <div>
+            <h1>STONE-SCISSORS-PAPER</h1>
+        </div>
+        <div>
+            <h1>{{ score }}</h1>
+        </div>
+        <div class="header_index">
+            <form method="POST">
+                <input type="submit" name="operation" value="logout">
+                <input type="submit" name="operation" value="history">
+            </form>
+        </div>
     </header>
     <main>
         <form method="POST">
