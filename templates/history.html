@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>REG&LOG</title>
+    <link rel="stylesheet" href="static/styles.css">
+</head>
+<body>
+    <header>
+        <h1>HISTORY</h1>
+        <div class="header_index">
+            <form method="POST">
+                <input type="submit" name="operation" value="back">
+            </form>
+        </div>
+    </header>
+    <main>
+        <div class="reg">
+            {% for game_result in games_results %}
+                <p>{{ game_result }}</p>
+            {% endfor %}
+        </div> 
+    </main>
+</body>
+</html>

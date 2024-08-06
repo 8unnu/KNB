@@ -9,7 +9,8 @@ from fastapi.responses import RedirectResponse
 
 from sqlite_db import (sql_operation, get_all_usernames,
                        get_user_password, get_user_id,
-                       get_games_results_wins, get_games_results_loses)
+                       get_games_results_wins, get_games_results_loses,
+                       get_games_results)
 from security import create_jwt_token, decode_jwt_token
 
 app = FastAPI()
@@ -73,8 +74,9 @@ async def game(request: Request,
                     response.delete_cookie("jwt_token")
                     return response
                 elif operation == "history":
-                    response = RedirectResponse(request.url_for('user'), status_code=status.HTTP_303_SEE_OTHER)
+                    response = RedirectResponse(request.url_for('history'), status_code=status.HTTP_303_SEE_OTHER)
                     return response
+
                 sign = await sign_converter(sign)
 
                 arr = ['stone', 'scissors', 'paper']
@@ -189,3 +191,44 @@ async def create_user(request: Request,
         response = templates.TemplateResponse('profile.html', context=context)
         response.delete_cookie("jwt_token")
         return response
+
+@app.get('/history')
+async def history(request: Request,
+                  users: dict = Depends(get_all_usernames),
+                  jwt_token=Cookie(default=None)):
+    if jwt_token:
+        payload = decode_jwt_token(jwt_token)
+        for user_data in users:
+            if user_data[0] == payload:
+
+                id = await get_user_id(payload)
+                completed_id = id[0][0]
+
+                games_results = await get_games_results(completed_id)
+                arr_games_results = []
+
+                len_results = len(games_results)
+
+                for game_result in reversed(games_results):
+                    if game_result[0] == 1:
+                        result = f"{len_results} - Win"
+                    elif game_result[0] == 0:
+                        result = f"{len_results} - Lose "
+                    else:
+                        result = f"{len_results} - Draw"
+                    arr_games_results.append(result)
+                    len_results -= 1
+
+                context = {
+                    'request': request,
+                    'games_results': arr_games_results
+                }
+
+                return templates.TemplateResponse('history.html', context=context)
+    return RedirectResponse(request.url_for('user'))
+
+@app.post('/history')
+async def history_back(request: Request,
+                       operation: str = Form(default=None)):
+    if operation == "back":
+        return RedirectResponse(request.url_for('index'))

@@ -60,11 +60,10 @@ main .reg input:hover {
     background: #F8F8FF;
 }
 
+
 header div {
     text-align: center;
     margin-bottom: 10px;
-    
-    
 }
 header .header_index input {
     height: 50px;
@@ -80,4 +79,11 @@ header .header_index input {
 header .header_index input:hover {
     border: solid 3px #00FFFF;
     background: #F8F8FF;
+}
+
+main .reg p {
+    font-family: sans-serif Verdana;
+    color: #008B8B;
+    text-align: center;
+    font-size: 26px;
 }
