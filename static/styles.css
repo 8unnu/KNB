@@ -13,12 +13,12 @@ main div {
     text-align: center;
     margin-bottom: 15px;
 }
-main label {
+main .index label {
     font-family: sans-serif Verdana;
     color: #008B8B;
     text-align: center;
 }
-main input {
+main .index input {
     height: 500px;
     width: 500px;
     border: solid 3px #008B8B;
@@ -27,7 +27,7 @@ main input {
     background: #DCDCDC;
     transition: 1.2s;
 }
-main input:hover {
+main .index input:hover {
     border: solid 3px #00FFFF;
     background: #F8F8FF;
     margin: 0 50px;
@@ -36,4 +36,26 @@ footer h1 {
     font-family: sans-serif Verdana;
     color: #008B8B;
     text-align: center;
+}
+
+
+main .reg label {
+    font-family: sans-serif Verdana;
+    color: #008B8B;
+    text-align: center;
+}
+main .reg input {
+    height: 50px;
+    width: 200px;
+    border: solid 3px #008B8B;
+    border-radius: 10px;
+    font-size: 14px;
+    background: #DCDCDC;
+    transition: 1.2s;
+    font-family: sans-serif Verdana;
+    color: #008B8B;
+}
+main .reg input:hover {
+    border: solid 3px #00FFFF;
+    background: #F8F8FF;
 }

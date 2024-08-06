@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>REG&LOG</title>
+    <link rel="stylesheet" href="static/styles.css">
+</head>
+<body>
+    <header>
+        <h1>REGISTRATION&LOGIN</h1>
+        <h1>{{ score }}</h1>
+    </header>
+    <main>
+        <form method="POST">
+            <div class="reg">
+                <label>username</label>
+            </div>
+            <div class="reg">
+                <input type="text" name="username">
+            </div>
+            <div class="reg">
+                <label>password</label>
+            </div>
+            <div class="reg">
+                <input type="text" name="password">
+            </div>
+            <div class="reg">
+                <input type="submit" name="operation" value="register">
+                <input type="submit" name="operation" value="login">
+            </div>
+            <div class="reg">
+                <input type="submit" name="operation" value="logout">
+            </div>
+        </form>
+    </main>
+    <footer>
+        <h1>{{ error }}</h1>
+    </footer>
+</body>
+</html>
