@@ -37,7 +37,7 @@ def res_converter(a):
         return ["Lose", "Win"]
 
 user_id = 9
-connection = sqlite3.connect("knb_sqlite.db")
+connection = sqlite3.connect("../knb_sqlite.db")
 cursor = connection.cursor()
 cursor.execute(f'''SELECT win FROM game_data WHERE user_id={user_id} AND win=0;''')
 result = cursor.fetchall()
