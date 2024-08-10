@@ -7,11 +7,14 @@ from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import RedirectResponse
 
-from core.sqlite_db import (sql_operation, get_all_usernames,
-                            get_user_password, get_user_id,
-                            get_games_results_wins, get_games_results_loses,
-                            get_games_results)
-from core.security import create_jwt_token, decode_jwt_token
+from db.sqlite_db import (sql_operation, get_all_usernames,
+                          get_user_password, get_user_id,
+                          get_games_results_wins, get_games_results_loses,
+                          get_games_results)
+
+from app.security import create_jwt_token, decode_jwt_token
+
+from app.endpoints import index
 
 app = FastAPI()
 
@@ -36,28 +39,33 @@ async def reverse_sign_converter(sign):
         return "🪨"
     elif sign == "paper":
         return "🧻"
+
 @app.get('/')
-async def index(request: Request,
-                users: dict = Depends(get_all_usernames),
-                jwt_token=Cookie(default=None)):
-    if jwt_token:
-        payload = decode_jwt_token(jwt_token)
-        for user_data in users:
-            if user_data[0] == payload:
+async def index_redirecter():
+    return {"message": "visit to /knb"}
 
-                id = await get_user_id(payload)
-                completed_id = id[0][0]
-
-                wins = await get_games_results_wins(completed_id)
-                loses = await get_games_results_loses(completed_id)
-                score = f"{wins}:{loses}"
-
-                context = {
-                    "request": request,
-                    "score": score
-                }
-                return templates.TemplateResponse('index.html', context=context)
-    return RedirectResponse(request.url_for('user'))
+# @app.get('/')
+# async def index(request: Request,
+#                 users: dict = Depends(get_all_usernames),
+#                 jwt_token=Cookie(default=None)):
+#     if jwt_token:
+#         payload = decode_jwt_token(jwt_token)
+#         for user_data in users:
+#             if user_data[0] == payload:
+#
+#                 id = await get_user_id(payload)
+#                 completed_id = id[0][0]
+#
+#                 wins = await get_games_results_wins(completed_id)
+#                 loses = await get_games_results_loses(completed_id)
+#                 score = f"{wins}:{loses}"
+#
+#                 context = {
+#                     "request": request,
+#                     "score": score
+#                 }
+#                 return templates.TemplateResponse('index.html', context=context)
+#     return RedirectResponse(request.url_for('user'))
 
 @app.post('/')
 async def game(request: Request,
@@ -126,11 +134,9 @@ async def game(request: Request,
                 return templates.TemplateResponse('index.html', context=context)
     return RedirectResponse(request.url_for('user'))
 @app.get('/users')
-async def user(request: Request,
-               users: dict = Depends(get_all_usernames)):
+async def user(request: Request):
     context = {
-        'request': request,
-        'users': users
+        'request': request
     }
     return templates.TemplateResponse('profile.html', context=context)
 
