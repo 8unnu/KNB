@@ -4,13 +4,10 @@ from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import RedirectResponse
 
-from core.sqlite_db import get_all_usernames
 from core.security import create_jwt_token, decode_jwt_token
 from core.dao import (game_context, get_reg_user_error, get_login_error,
                       user_create, history_context, standart_index_context)
-
-from database.database import async_factory
-from database.models import User, Score
+from core.postgres_db import pg_get_all_usernames
 
 knb_router = APIRouter(
     prefix='',
@@ -22,7 +19,7 @@ knb_router.mount('/static', StaticFiles(directory='static'))
 
 @knb_router.get('/')
 async def index(request: Request,
-                users: dict = Depends(get_all_usernames),
+                users: dict = Depends(pg_get_all_usernames),
                 jwt_token=Cookie(default=None)):
     if jwt_token:
         payload = decode_jwt_token(jwt_token)
@@ -36,7 +33,7 @@ async def index(request: Request,
 async def game(request: Request,
                sign: str = Form(default=None),
                operation: str = Form(default=None),
-               users: dict = Depends(get_all_usernames),
+               users: dict = Depends(pg_get_all_usernames),
                jwt_token=Cookie(default=None)):
     if jwt_token:
         payload = decode_jwt_token(jwt_token)
@@ -63,8 +60,8 @@ async def user(request: Request):
     return templates.TemplateResponse('profile.html', context={'request': request})
 
 @knb_router.post('/users')
-async def create_user(request: Request,
-                      users: dict = Depends(get_all_usernames),
+async def create_login_user(request: Request,
+                      users: dict = Depends(pg_get_all_usernames),
                       username: str = Form(default=None),
                       password: str = Form(default=None),
                       operation: str = Form()):
@@ -91,7 +88,7 @@ async def create_user(request: Request,
 
 @knb_router.get('/history')
 async def history(request: Request,
-                  users: dict = Depends(get_all_usernames),
+                  users: dict = Depends(pg_get_all_usernames),
                   jwt_token=Cookie(default=None)):
     if jwt_token:
         payload = decode_jwt_token(jwt_token)

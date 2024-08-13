@@ -1,14 +1,30 @@
+import json
 import sqlite3
 import os
 
+import asyncio
+
+from database.database import async_factory
+from database.models import User, Score
+
+from sqlalchemy.future import select
+
+async def get_users():
+    async with async_factory() as session:
+        query = select(Score.result).filter_by(user_id=1, result=2)
+        result = await session.execute(query)
+        games_results = result.fetchall()
+        return len(games_results)
+
+asyncio.run(get_users())
 # ----------------------------------------------------------------------------------------------------------------------
 # create table
 # operation = f'''CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY AUTOINCREMENT, username VARCHAR(255), password VARCHAR(16));'''
 # operation = f'''CREATE TABLE IF NOT EXISTS game_data (win INTEGER, user_id INTEGER, FOREIGN KEY (user_id) REFERENCES users(id));'''
 # ----------------------------------------------------------------------------------------------------------------------
 
-file = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", ".env")
-print(file)
+# file = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", ".env")
+# print(file)
 # connection = sqlite3.connect("knb_sqlite.db")
 #
 # username = "bunnu2"

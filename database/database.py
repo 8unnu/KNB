@@ -13,7 +13,6 @@ async_factory = async_sessionmaker(engine, expire_on_commit=False)
 
 # annotations
 created_at = Annotated[datetime, mapped_column(server_default=func.now())]
-update_at = Annotated[datetime, mapped_column(server_default=func.now(), onupdate=datetime.now())]
 int_pk = Annotated[int, mapped_column(primary_key=True)]
 str_uniq = Annotated[str, mapped_column(unique=True, nullable=False)]
 score_landmark = Annotated[int, mapped_column(server_default=text('0'))]
@@ -26,4 +25,3 @@ class Base(AsyncAttrs, DeclarativeBase):
         return f"{cls.__name__.lower()}s"
 
     created_at: Mapped[created_at]
-    update_at: Mapped[update_at]

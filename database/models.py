@@ -16,9 +16,7 @@ class User(Base):
 class Score(Base):
     id: Mapped[int_pk]
     user_id: Mapped[int] = mapped_column(ForeignKey("users.id"), nullable=False)
-    wins: Mapped[score_landmark]
-    draws: Mapped[score_landmark]
-    losses: Mapped[score_landmark]
+    result: Mapped[score_landmark]
 
     def __str__(self):
         return (f"{self.__class__.__name__}(id={self.id}, user_id={self.user_id})")
