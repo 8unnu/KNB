@@ -9,6 +9,9 @@ from core.security import create_jwt_token, decode_jwt_token
 from core.dao import (game_context, get_reg_user_error, get_login_error,
                       user_create, history_context, standart_index_context)
 
+from database.database import async_factory
+from database.models import User, Score
+
 knb_router = APIRouter(
     prefix='',
     tags=['knb']
