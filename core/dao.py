@@ -1,7 +1,7 @@
 import random
 
-from .postgres_db import (pg_get_user_id, pg_user_create, pg_get_user_password, pg_game_operation,
-                          pg_get_games_results_loses, pg_get_games_results_wins, pg_get_games_results)
+from database.postgres_db import (pg_get_user_id, pg_user_create, pg_get_user_password, pg_game_operation,
+                                  pg_get_games_results_loses, pg_get_games_results_wins, pg_get_games_results)
 
 # knb_games_converters _________________________________________________________________________________________________
 async def sign_converter(sign):

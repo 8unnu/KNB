@@ -1,13 +1,12 @@
 from fastapi import (APIRouter, Request, Form,
                      Cookie, Depends, status)
 from fastapi.templating import Jinja2Templates
-from fastapi.staticfiles import StaticFiles
 from fastapi.responses import RedirectResponse
 
 from core.security import create_jwt_token, decode_jwt_token
 from core.dao import (game_context, get_reg_user_error, get_login_error,
                       user_create, history_context, standart_index_context)
-from core.postgres_db import pg_get_all_usernames
+from database.postgres_db import pg_get_all_usernames
 
 knb_router = APIRouter(
     prefix='',
