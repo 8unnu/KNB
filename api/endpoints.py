@@ -15,7 +15,6 @@ knb_router = APIRouter(
 )
 
 templates = Jinja2Templates(directory='templates')
-knb_router.mount('/static', StaticFiles(directory='static'))
 
 @knb_router.get('/')
 async def index(request: Request,
