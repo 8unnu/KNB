@@ -8,5 +8,5 @@ app.include_router(knb_router)
 
 app.mount('/static', StaticFiles(directory='static'))
 
-if __name__ == "__main__":
-    uvicorn.run("main:app")
+# if __name__ == "__main__":
+#     uvicorn.run("main:app")
